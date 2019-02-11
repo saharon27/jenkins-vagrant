@@ -108,6 +108,11 @@ git config --global push.default simple
 git config --global core.autocrlf false
 EOF
 
+#install some more tools
+
+apt-get install -y maven
+apt-get install -y ant
+
 
 #
 # create artifacts that need to be shared with the other nodes.

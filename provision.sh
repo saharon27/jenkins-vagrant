@@ -570,14 +570,11 @@ import jenkins.model.Jenkins
 import hudson.tasks.Mailer
 
 [
-    [id: "alice.doe",   fullName: "Alice Doe"],
-    [id: "bob.doe",     fullName: "Bob Doe"  ],
-    [id: "carol.doe",   fullName: "Carol Doe"],
+    [id: "max.doe",   fullName: "Max Doe"],
+    [id: "sharon.yanko",     fullName: "Sharon Yanko"  ],
+    [id: "john.doe",   fullName: "John Doe"],
     [id: "dave.doe",    fullName: "Dave Doe" ],
-    [id: "eve.doe",     fullName: "Eve Doe"  ],
-    [id: "frank.doe",   fullName: "Frank Doe"],
-    [id: "grace.doe",   fullName: "Grace Doe"],
-    [id: "henry.doe",   fullName: "Henry Doe"],
+
 ].each {
     u = Jenkins.instance.securityRealm.createAccount(it.id, "password")
     u.fullName = it.fullName
@@ -640,21 +637,3 @@ Jenkins.instance.nodesObject.addNode(node)
 Jenkins.instance.nodesObject.save()
 EOF
 
-
-#
-# add the macos slave node.
-
-jgroovy = <<'EOF'
-import jenkins.model.Jenkins
-import hudson.slaves.DumbSlave
-import hudson.slaves.CommandLauncher
-
-node = new DumbSlave(
-    "macos",
-    "/var/jenkins",
-    new CommandLauncher("ssh macos.jenkins.example.com /var/jenkins/bin/jenkins-slave"))
-node.numExecutors = 3
-node.labelString = "macos 10.12 amd64"
-Jenkins.instance.nodesObject.addNode(node)
-Jenkins.instance.nodesObject.save()
-EOF
