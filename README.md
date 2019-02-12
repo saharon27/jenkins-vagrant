@@ -15,7 +15,6 @@ This configures Jenkins through [CLI/JNLP](https://wiki.jenkins-ci.org/display/J
 * Add a Ubuntu Linux slave node.
 * Add a Windows slave node.
   * With enabled long path support on the OS and chocolatey.
-* Add a macOS slave node.
 
 **NB** If you are new to Groovy, be sure to check the [Groovy Learn X in Y minutes page](https://learnxinyminutes.com/docs/groovy/).
 
@@ -30,7 +29,6 @@ Build and install the [Ubuntu Base Box](https://github.com/rgl/ubuntu-vagrant).
 
 Build and install the [Windows 2019 Base Box](https://github.com/rgl/windows-2016-vagrant).
 
-Build and install the [macOS Base Box](https://github.com/rgl/macos-vagrant).
 
 Add the following entry to your `/etc/hosts` file:
 
