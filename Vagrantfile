@@ -5,8 +5,6 @@ ENV['VAGRANT_NO_PARALLEL'] = 'yes'
 config_jenkins_fqdn = 'jenkins.example.com'
 config_jenkins_ip   = '10.10.10.100'
 # Slaves params
-config_ubuntu_61630_slave_fqdn  = "ubuntu-61630-slave.#{config_jenkins_fqdn}"
-config_ubuntu_61630_slave_ip    = '10.10.10.170'
 config_ubuntu_fqdn  = "ubuntu-slave.#{config_jenkins_fqdn}"
 config_ubuntu_ip    = '10.10.10.101'
 config_windows_fqdn = "windows.#{config_jenkins_fqdn}"
@@ -51,14 +49,6 @@ Vagrant.configure('2') do |config|
   end
 
 
-
-  config.vm.define :ubuntu_61630_slave do |config|
-    config.vm.hostname = config_ubuntu_61630_slave_fqdn
-    config.vm.network :private_network, ip: config_ubuntu_61630_slave_ip, libvirt__forward_mode: 'route', libvirt__dhcp_enabled: false
-    config.vm.provision :shell, inline: "echo '#{config_jenkins_ip} #{config_jenkins_fqdn}' >>/etc/hosts"
-    config.vm.provision :shell, inline: "echo '#{config_gitlab_ip} #{config_gitlab_fqdn}' >>/etc/hosts"
-    config.vm.provision :shell, path: 'provision-ubuntu.sh'
-  end
   config.vm.define :ubuntu_slave do |config|
     config.vm.hostname = config_ubuntu_fqdn
     config.vm.network :private_network, ip: config_ubuntu_ip, libvirt__forward_mode: 'route', libvirt__dhcp_enabled: false

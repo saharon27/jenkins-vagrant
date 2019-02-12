@@ -20,7 +20,8 @@ source /vagrant/jenkins-cli.sh
 # see https://github.com/jenkinsci/git-plugin/blob/master/src/main/java/hudson/plugins/git/extensions/impl/CleanBeforeCheckout.java
 # see https://github.com/jenkinsci/xunit-plugin/blob/master/src/main/java/org/jenkinsci/plugins/xunit/XUnitBuilder.java
 
-# create the dump-environment folder to contain all of our dump jobs.
+# create the environment-Info folder to contain all of our env-info jobs.
+echo 'Creating pre-defined jobs...'
 jgroovy = <<'EOF'
 import jenkins.model.Jenkins
 import com.cloudbees.hudson.plugins.folder.Folder
@@ -58,7 +59,7 @@ import jenkins.model.Jenkins
 import org.jenkinsci.plugins.workflow.job.WorkflowJob
 import org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition
 
-folder = Jenkins.instance.getItem('dump-environment')
+folder = Jenkins.instance.getItem('environment-Info')
 
 project = new WorkflowJob(folder, 'linux-pipeline')
 project.definition = new CpsFlowDefinition("""\
