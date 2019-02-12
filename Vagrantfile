@@ -46,7 +46,6 @@ Vagrant.configure('2') do |config|
     config.vm.provision :shell, path: 'provision-mailhog.sh'
     config.vm.provision :shell, path: 'provision.sh'
     config.vm.provision :shell, path: 'provision-example-jobs.sh'
-    config.vm.provision :shell, path: 'provision-example-test-jenkins-gitlab-plugin.sh'
     config.vm.provision :reload
     config.vm.provision :shell, path: 'provision-summary.sh'
   end
@@ -117,6 +116,5 @@ done
   config.trigger.after :up do |trigger|
     trigger.only_on = [/ubuntu*/, 'windows']
     trigger.run = {inline: "vagrant ssh -c 'cat /vagrant/tmp/*.ssh_known_hosts | sudo tee /etc/ssh/ssh_known_hosts' jenkins"}
-    #trigger.run = path: 'addSlave.sh'
   end
 end

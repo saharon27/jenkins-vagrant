@@ -1,6 +1,7 @@
 #!/bin/bash
 set -eux
 
+
 randomNum=$( shuf -i 0-65000 -n 1 )
 machineName="ubuntu-${randomNum}-slave"
 vmName="ubuntu_${randomNum}_slave"
@@ -33,7 +34,6 @@ awk '/# Slaves params/{
 vagrant up ${vmName}
 
 # creating new slave in jenkins
-#vagrant ssh -c "${JCLI} -auth vagrant:vagrant get-node ubuntu-slave | ${JCLI} -auth vagrant:vagrant create-node ${machineName}" jenkins
 JCLI="java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080"
 
 vagrant ssh -c 'cat <<EOF | java -jar /var/cache/jenkins/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 -auth vagrant:vagrant create-node '$machineName'
@@ -54,3 +54,5 @@ EOF' jenkins
 
 # adding new slave to hosts on jenkins master vm
 vagrant ssh -c "echo '${newIpAddrs} ${machineName}.${jenkinsfqdn}' | sudo tee -a /etc/hosts" jenkins
+
+echo -e  "Node is added successfully !"
